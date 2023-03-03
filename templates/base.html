@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>City Computers</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet"> <!-- range slider -->
+
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+  {% comment %} <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
+  {% comment %} <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet"> {% endcomment %}
+  {% comment %} <link href="{% static 'css/price-range.css' %}" rel="stylesheet"> {% endcomment %}
+  {% comment %} <link href="{% static 'css/animate.css' %}" rel="stylesheet"> {% endcomment %}
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    {% block body %}{% endblock body %}
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a>
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- bootstrap js -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <!-- custom js -->
+  <script src="{% static 'js/custom.js' %}"></script>
+  
+  <script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+  <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  {% include 'ajax.html' %}
+
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tag %}
+
+{% block body %}
+     <!-- header section strats -->
+     <header class="header_section">
+		<div class="header_top">
+		  <div class="container-fluid">
+			<div class="top_nav_container">
+			  <div class="contact_nav">
+				<a href="">
+				  <i class="fa fa-phone" aria-hidden="true"></i>
+				  <span>
+					Call : +88 01911 211 421
+				  </span>
+				</a>
+				<a href="">
+				  <i class="fa fa-envelope" aria-hidden="true"></i>
+				  <span>
+					Email : developernaimuddin@gmail.com
+				  </span>
+				</a>
+			  </div>
+			  <form class="search_form" action="{% url 'search' %}" method="get">
+				<input type="text" name="query" id="query" class="form-control">
+				<button type="submit" class="btn btn-warning">
+				  <i class="fa fa-search"></i>
+				</button>
+			  </form>
+			  <div class="user_option_box">
+				{% if user.is_authenticated %}
+				<a href="{% url 'logout_view' %}" class="account-link">
+				  <i class="fa fa-user" aria-hidden="true"></i>
+				  <span>
+					Logout
+				  </span>
+				</a>
+				{% else %}
+				<a href="{% url 'login' %}" class="account-link">
+				  <i class="fa fa-user" aria-hidden="true"></i>
+				  <span>
+					Login
+				  </span>
+				</a>
+				{% endif %}
+				<a href="{% url 'cart' %}" class="cart-link">
+				  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				  <span>
+					Cart <sup>{{request.session.cart|length}}</sup>
+				  </span>
+				</a>
+			  </div>
+			</div>
+  
+		  </div>
+		</div>
+		<div class="header_bottom">
+		  <div class="container-fluid">
+			<nav class="navbar navbar-expand-lg custom_nav-container ">
+			  <a class="navbar-brand" href="{% url 'index' %}">
+				<span>
+				  City Computers
+				</span>
+			  </a>
+  
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class=""> </span>
+			  </button>
+  
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ">
+				  <li class="nav-item active">
+					<a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#"> About</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="{% url 'product' %}">Products</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#">Why Us</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#">Testimonial</a>
+				  </li>
+				</ul>
+			  </div>
+			</nav>
+		  </div>
+		</div>
+	  </header>
+	  <!-- end header section -->
+
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					{% for key,value in request.session.cart.items %}
+					<tbody>
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="{{value.image}}" alt="" width="100em" height="100em"></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">{{value.name}}</a></h4>
+								<p>Web ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>${{value.price}}</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" href="{% url 'item_increment' value.product_id %}"> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value="{{value.quantity}}" autocomplete="off" size="2">
+									<a class="cart_quantity_down" href="{% url 'item_decrement' value.product_id %}"> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">${{ value.price|multiply:value.quantity }}</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href="{% url 'item_clear' value.product_id %}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+					</tbody>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>What would you like to do next?</h3>
+				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="chose_area">
+						<ul class="user_option">
+							<li>
+								<input type="checkbox">
+								<label>Use Coupon Code</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Use Gift Voucher</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Estimate Shipping & Taxes</label>
+							</li>
+						</ul>
+						<ul class="user_info">
+							<li class="single_field">
+								<label>Country:</label>
+								<select>
+									<option>United States</option>
+									<option>Bangladesh</option>
+									<option>UK</option>
+									<option>India</option>
+									<option>Pakistan</option>
+									<option>Ucrane</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+								
+							</li>
+							<li class="single_field">
+								<label>Region / State:</label>
+								<select>
+									<option>Select</option>
+									<option>Dhaka</option>
+									<option>London</option>
+									<option>Dillih</option>
+									<option>Lahore</option>
+									<option>Alaska</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+							
+							</li>
+							<li class="single_field zip-field">
+								<label>Zip Code:</label>
+								<input type="text">
+							</li>
+						</ul>
+						<a class="btn btn-default update" href="">Get Quotes</a>
+						<a class="btn btn-default check_out" href="">Continue</a>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>$
+								
+							</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>$61</span></li>
+						</ul>
+							<a class="btn btn-default update" href="">Update</a>
+							<a class="btn btn-default check_out" href="">Check Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
+
+{% endblock body %}
